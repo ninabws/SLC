@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="{% url 'listas:verlista' %}">Ver listas</a>
+    <a href="{% url 'listas:addlista' %}">Criar Lista</a>
+    
+    <h2>EDITAR PRODUTO</h2>
+    <form method="post" aria-required="false">
+        {% csrf_token %}
+
+        {{produto1.as_p}}
+
+        <button type="submit">Update</button>
+    </form>
+</body>
+</html>
