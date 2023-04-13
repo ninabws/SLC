@@ -12,6 +12,7 @@ class lista(models.Model):
 class produtos(models.Model):
     nomeproduto = models.CharField(max_length=80, default= None)
     precoproduto = models.FloatField(default= 0)
+    lista2 = models.ForeignKey(lista, on_delete=models.CASCADE, related_name="departures")
     
     def __str__(self):
         return self.nomeproduto

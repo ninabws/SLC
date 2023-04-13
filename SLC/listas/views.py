@@ -16,14 +16,14 @@ def cadastrar(request):
     if request.method == "GET":
         return render (request, 'cadastrar.html')
     else:
-        user = request.POST.get('user')
+        username = request.POST.get('username')
         senha = request.POST.get('senha')
-        user1 = User.objects.filter(user=user, password=senha).first()
+        user1 = User.objects.filter(username=username).first()
         
         if user1:
             return HttpResponse("Esse user já existe")
         
-        user1 = User.objects.create_user(user=user1, password=senha)
+        user1 = User.objects.create_user(username=username, password=senha)
         user1.save()
         return HttpResponse("Usuario cadastrado!")
 
@@ -31,21 +31,21 @@ def login(request):
     if request.method == "GET":
         return render (request, 'login.html')
     else:
-        user = request.POST.get('user')
+        username = request.POST.get('username')
         senha = request.POST.get('senha')
-        user1 = authenticate(user=user1, password=senha)
+        user1 = authenticate(username=username, password=senha)
         
-        if user:
-            auth_login(request, user)
-            return HttpResponseRedirect("../verlista")
+        if user1:
+            auth_login(request, user1)
+            return HttpResponseRedirect("../visualizar")
         else:
             return HttpResponse("Email ou senha inválidos, tente novamente")
 
 
-def verlista(request):
+def visualizar(request):
     if request.user.is_authenticated:
-        return render(request, 'verlista.html', {
-            "lista": lista.objects.all(), "produtos": produtos.objects.all
+        return render(request, 'visualizar.html', {
+            "lista1": lista.objects.all(), "produtos": produtos.objects.all()
         })
     semlogin()
 
@@ -81,19 +81,19 @@ def editarlista(request, id):
         
         if produto1.is_valid():
             produto1.save()
-            return HttpResponseRedirect("../../verlista")
+            return HttpResponseRedirect("../../visualizar")
 
-        return render(request, 'editar.html', {"produtos":produto, 'produto1' : produto1})
+        return render(request, 'atualizar.html', {"produtos":produto, 'produto1' : produto1})
 
 
 def apagarlista(request, id):
-    lista = lista.objects.get(id=id)
-    lista.delete()
-    return HttpResponseRedirect("../../verlista")
+    lista1 = lista.objects.get(id=id)
+    lista1.delete()
+    return HttpResponseRedirect("../../visualizar")
 
     
 
 def apagarproduto(request, id):
     produto = produtos.objects.get(id=id)
     produto.delete()
-    return HttpResponseRedirect("../../verlista")
+    return HttpResponseRedirect("../../visualizar")
