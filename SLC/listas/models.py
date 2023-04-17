@@ -12,7 +12,8 @@ class lista(models.Model):
 class produtos(models.Model):
     nomeproduto = models.CharField(max_length=80, default= None)
     precoproduto = models.FloatField(default= 0)
-    lista2 = models.ForeignKey(lista, on_delete=models.CASCADE, related_name="departures")
+    categoria = models.ForeignKey(lista, on_delete=models.CASCADE, default=0)
+
     
     def __str__(self):
         return self.nomeproduto
@@ -25,4 +26,4 @@ class criarlista(ModelForm):
 class criarproduto(ModelForm):
     class Meta:
         model = produtos
-        fields = ['nomeproduto', 'precoproduto']
+        fields = ['nomeproduto', 'precoproduto', 'categoria']

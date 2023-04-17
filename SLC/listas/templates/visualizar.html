@@ -4,21 +4,69 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>SLC</title>
 </head>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=News+Cycle&display=swap');
+    
+
+.bloco{
+    display: flex;
+    flex-direction: column;
+    width: 98%;
+    height: auto;
+    background: rgba(144,184,234,1);
+    padding: 1%;
+    border-radius: 9px;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.699);
+    
+}
+h2, p {
+    font-family: 'News Cycle', sans-serif;
+    
+}
+
+h1, a {
+    font-family: 'News Cycle', sans-serif;
+    text-align: center;
+    
+}
+
+#pad{
+    padding-top: 15%;
+    padding-bottom: 12%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+.left {
+    text-align: right;
+    align-items: right;
+}
+</style>
 <body>
-    <a href="{% url 'listas:addlista' %}">Criar Lista</a>
-    <a href="{% url 'listas:addproduto' %}">Adicionar Produto</a>
-    <h2>-=-=-=-Listas-=-=-=-</h2>
+
+    <div class="bloco">
+    <h1>🛒 LISTAS 🛒</h1>
+    <div class="left">
+        <h2> Total: R${{valor}}</h2>
+    </div>
     {% for lista in lista1 %}
-        <h2>{{ lista.nomelista }} --- <a href="{% url 'listas:apagarlista' lista.id %}">Apagar Lista</a></h2>
-        {%for produto in produtos%}
-                <li>{{produto.nomeproduto}} <a href="{% url 'listas:editarlista' produto.id %}">Editar</a></li> 
-                <a href="{% url 'listas:apagarproduto' produto.id %}">Apagar Produto</a></li>
-                {% if produtos.precoproduto > 0%}
-                    <li><p>Valor: {{produtos.precoproduto}}</p></li>
-                {%endif%}
-            {%endfor%}
+        <h2> · {{ lista.nomelista }} ⇁ <a href="{% url 'listas:apagarlista' lista.id %}">Apagar Lista</a></h2>
+        {% for produtos in produto1 %}
+            {% if produtos.categoria == lista%}
+                <p>⇾ {{produtos.nomeproduto}}, R$: {{produtos.precoproduto}}
+                <a href="{% url 'listas:editarlista' produtos.id %}">editar</a> / <a href="{% url 'listas:apagarproduto' produtos.id %}">apagar</a></p>
+            
+
+            {%endif%}
         {% endfor %}
+        {% endfor %}
+        <br><br><br><br><br>
+        <div id="pad">
+            <a href="{% url 'listas:addlista' %}">Adicionar lista</a>
+        <a href="{% url 'listas:addproduto' %}">Adicionar produto</a>
+        </div>
+    </div>
 </body>
 </html>

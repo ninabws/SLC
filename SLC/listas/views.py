@@ -44,8 +44,11 @@ def login(request):
 
 def visualizar(request):
     if request.user.is_authenticated:
+        all = 0
+        for tudo in produtos.objects.all():
+            all = all + tudo.precoproduto
         return render(request, 'visualizar.html', {
-            "lista1": lista.objects.all(), "produtos": produtos.objects.all()
+            "lista1": lista.objects.all(), "produto1": produtos.objects.all(), "valor":all
         })
     semlogin()
 
@@ -70,6 +73,7 @@ def addproduto(request):
             produto1.save()
 
         return render(request, 'addproduto.html', {'produto1' : produto1})
+    
     semlogin()
 
 

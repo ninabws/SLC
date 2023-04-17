@@ -4,25 +4,42 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>SLC</title>
 </head>
 <style>
-
+@import url('https://fonts.googleapis.com/css2?family=News+Cycle&display=swap');
+body {
+    margin: 142px;
+    background: rgba(144,184,234,1);
+    font-family: 'News Cycle', sans-serif;
+}
+h1 {
+    text-align: right;
+}
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 10vw;
+    background-color: #ffffff;
+    border-radius: 6px;
+    box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.445);
+}
 </style>
 </head>
 <body>
-<h1>CADASTRO/LOGIN</h1>
+<h1>SLC <br>  Um sistema simples e seguro</h1>
 <div id="links">
     
     <div class="bloco">
-        <h2>cadastrar</h2>
-        <div class="button"><a href="{% url 'listas:cadastrar' %}">Cadastro</a></div>
+        <h2>Faça já o seu cadastro!</h2>
+        <div class="button"><a href="{% url 'listas:cadastrar' %}">clique aqui</a></div>
     </div>
 
 
     <div class="bloco">
-        <h2>login</h2>
-        <div class="button"><a href="{% url 'listas:login' %}">Login</a></div>
+        <h2>Realize o seu login</h2>
+        <div class="button"><a href="{% url 'listas:login' %}">clique aqui</a></div>
 
     </div>
 </div>
